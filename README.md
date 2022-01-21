@@ -2,7 +2,7 @@
 
 a parser for [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) binary release
 
-# usage
+## usage
 
 ```go
 import dlc "github.com/fa1se/dlc-parser"
@@ -33,6 +33,6 @@ for _, record := range selected {
 }
 ```
 
-# test
+## test
 
 both `ParseCollection()` and `Select()` can be tested with latest binary release against implementation ported from [v2fly/v2ray-core](https://github.com/v2fly/v2ray-core).
