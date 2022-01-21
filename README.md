@@ -6,15 +6,33 @@ a parser for [v2fly/domain-list-community](https://github.com/v2fly/domain-list-
 
 ```go
 import dlc "github.com/fa1se/dlc-parser"
-// ...
+
+// read all bytes into memory
+// suitable for a modest file size of ~1MB
 data, _ := ioutil.ReadFile("dlc.dat")
+
+// returns a map from country code to a list of domains
+// or nil on error
 sites := dlc.ParseCollection(data)
 if sites == nil {
 	// probably malformed buffer
 }
-selected := sites.Select("google@cn")
+// directly access the map
+selected := sites["google"]
+// or use select method 
+selected := sites.Select("google")
+// attributes are supported in latter way
+selected := sites.Select("google@ads")
+
+for _, record := range selected {
+	record.Value // e.g. "google.com" do something with the domain
+    record.Type // enum: dlc.RECORD_{KEYWORD,REGEXP,DOMAIN,FULL}
+	if record.Attr != nil {
+		// do something with attributes if needed, see more in implementation
+	}
+}
 ```
 
 # test
 
-both functions can be tested by latest binary release against an implementation ported from [v2fly/v2ray-core](https://github.com/v2fly/v2ray-core).
+both `ParseCollection()` and `Select()` can be tested with latest binary release against implementation ported from [v2fly/v2ray-core](https://github.com/v2fly/v2ray-core).
