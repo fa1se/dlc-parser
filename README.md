@@ -26,7 +26,7 @@ selected := sites.Select("google@ads")
 
 for _, record := range selected {
 	record.Value // e.g. "google.com" do something with the domain
-    record.Type // enum: dlc.RECORD_{KEYWORD,REGEXP,DOMAIN,FULL}
+	record.Type // enum: dlc.RECORD_{KEYWORD,REGEXP,DOMAIN,FULL}
 	if record.Attr != nil {
 		// do something with attributes if needed, see more in implementation
 	}
