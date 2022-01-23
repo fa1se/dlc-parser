@@ -46,6 +46,9 @@ func (attrs RecordAttr) ContainAll(targets []string) bool {
 	return !miss
 }
 
+// Filters geosite by given expression,
+// @attr expression supported.
+// Returns nil on no match.
 func (col Collection) Select(expr string) RecordList {
 	base, attrs := ParseExpr(expr)
 	if len(base) == 0 {
@@ -63,6 +66,9 @@ func (col Collection) Select(expr string) RecordList {
 		if record.Attr.ContainAll(attrs) {
 			filtered = append(filtered, record)
 		}
+	}
+	if len(filtered) == 0 {
+		return nil
 	}
 	return filtered
 }

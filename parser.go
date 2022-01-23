@@ -136,7 +136,7 @@ func ParseRecordList(buf []byte) (string, RecordList, []byte, int) {
 }
 
 // Read all data from buf and parse into Collection.
-// Returns nil on error
+// Returns nil on error.
 func ParseCollection(buf []byte) Collection {
 	var collection = make(Collection)
 	for len(buf) > 0 {
