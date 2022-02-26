@@ -1,4 +1,4 @@
-package parser
+package geosite
 
 const PARSE_ERR = 0
 

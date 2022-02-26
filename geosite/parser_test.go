@@ -1,4 +1,4 @@
-package parser_test
+package geosite_test
 
 import (
 	"errors"
@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	dlc "github.com/fa1se/dlc-parser"
+	"github.com/fa1se/dlc-parser/geosite"
 	"github.com/stretchr/testify/assert"
 	"github.com/v2fly/v2ray-core/v5/app/router/routercommon"
 
@@ -32,10 +32,10 @@ func LoadBinaryRelease(t *testing.T) []byte {
 	}
 }
 
-func GetTestCollection(t *testing.T) dlc.Collection {
+func GetTestCollection(t *testing.T) geosite.Collection {
 	data := LoadBinaryRelease(t)
 	// parse dlc.dat
-	col := dlc.ParseCollection(data)
+	col := geosite.ParseCollection(data)
 	assert.NotNil(t, col)
 	return col
 }
@@ -124,7 +124,7 @@ func GetReferenceSelectedList(t *testing.T, expr string) []*routercommon.Domain 
 	return selected
 }
 
-func assertSameDomainList(t *testing.T, expected []*routercommon.Domain, actual dlc.RecordList) {
+func assertSameDomainList(t *testing.T, expected []*routercommon.Domain, actual geosite.RecordList) {
 	t.Logf("size: %d\n", len(expected))
 	assert.Equal(t, len(expected), len(actual))
 	// sort before side-by-side comparison
@@ -140,7 +140,7 @@ func assertSameDomainList(t *testing.T, expected []*routercommon.Domain, actual 
 	}
 }
 
-func assertSameDomain(t *testing.T, expected *routercommon.Domain, actual *dlc.Record) {
+func assertSameDomain(t *testing.T, expected *routercommon.Domain, actual *geosite.Record) {
 	t.Logf("\tdomain: '%s', type: %d\n", expected.Value, expected.Type)
 	assert.Equal(t, expected.Value, actual.Value)
 	assert.Equal(t, int(expected.Type), int(actual.Type))
